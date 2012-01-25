@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+	<title>Zeke's Physics Project Progress</title>
+	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css"/>
+	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css"/>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-scrollspy.js"></script>
+	<style type="text/css">
+		section{
+			min-height: 600px;
+			padding-top: 4em;
+		}
+	</style>
+</head>
+<body id="bootstrap-js">
+<!-- Topbar
+		================================================== -->
+		<div class="topbar" data-scrollspy="scrollspy" >
+			<div class="fill">
+				<div class="container">
+					<h3><a href="#about">Zeke's Physics Modeling</a></h3>
+					<ul>
+						<li><a href="#about">About</a></li>
+						<li><a href="#vector">Vector.js</a></li>
+						<li><a href="#example">Example Concepts</a></li>
+						<li><a href="#questions">Questions!</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+		<!-- Container
+	    ================================================== -->
+		<div class="container">
+			<section id="about">
+				<div class="page-header">
+					<h1>About</h1>
+				</div>
+				<p>I am taking Physics at Smith this Spring. Because I learn well in a project based setting, I will also be participating in Hampshire's NS-299 course: Learning Activities Projects. I will develop an object-based software modeling platform for simulating physics scenarios.</p>
+					
+				<p>Objects will be able to have physical properties and vectors. These physical properties can be defined as functions of other physical properties. Vectors also can have their properties defined as functions. For example, an object, <em>ball,</em> can have its position defined as a function of its velocity, which can be represented by a vector.</p>
+
+				<p>I will also (soon) construct a "simulator" that can run certain operations visually in time.</p>
+
+				<p>On this page, you can see my working copy of Vectors.js, the javascript file I'm writing for the vector system. You can also see simulations as I write them. An active question list will also be maintained. There, I will post confusions I'm having, and record the answers!</p>
+			</section>
+
+			<section id="vector">
+				<div class="page-header"><h1>Vector.js</h1></div>
+				<pre class="prettyprint lang-js linenums">
+
+				</pre>
+				<div>&nbsp;</div>
+			</section>
+
+			<section id="example">
+				<div class="page-header">
+					<h1>Examples</h1>
+					<p>Here is where models will be listed!</h1>
+				</div>
+			</section>
+
+			<section id="questions">
+				<div class="page-header">
+					<h1>Question List / Issues</h1>
+					<table>
+						<thead>
+							<tr>
+								<th>&nbsp;</th>
+								<th>Date</th>
+								<th width="43%">Question</th>
+								<th width="43%">Answer</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><span class="label warning">UNANSWERED</span></td>
+								<td><date>01/24/12</date></td>
+								<td><strong>3D Vectors?</strong> Do I need them? How are they even defined? You would need two angles and a magnatude, or two points in 3d space. I think we'll just forget about them for now, right?</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td><span class="label warning">UNANSWERED</span></td>
+								<td><date>01/24/12</date></td>
+								<td>In this system, how do we add a bunch of vectors!? Might we need a VectorGroup class, which could handel methods of multiple vectors? What else would the VectorGroup need to do?</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td><span class="label warning">UNANSWERED</span></td>
+								<td><date>01/24/12</date></td>
+								<td>In my vector reverse function, I am programming it to keep the angle of the resultant vector less than 2 PI radions. Is this a mistake?</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+		<script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+		<script>
+		
+			$.get("Vector.js",function(data){
+				$(".prettyprint").html(data);
+				$(function () { prettyPrint(); });
+			});
+		
+		</script>
+</body>
+</html>
