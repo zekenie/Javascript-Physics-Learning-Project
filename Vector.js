@@ -19,6 +19,23 @@ var Vector = function(angle, magnatude, rad){
 }
 
 Vector.prototype = {
+
+	getAngle: function(){
+		return this.angle;
+	},
+
+	getMagnatude:function(){
+		return this.magnatude;
+	},
+
+	getX1:function(){
+		return this.x1;
+	},
+
+	getY1:function(){
+		return this.y1;
+	},
+
 	setPos:function(x,y){
 	//this method puts the vector in a location. 
 	//it takes x and y, and finds x2, y2 fromt he angle and magnatude.
@@ -47,8 +64,8 @@ Vector.prototype = {
 	//it finds the current magnatude, if it has changed.
 	//it updates the angle, if it has changed.
 		this.getComponentVectors();
-		this.magnatude = sqrt(pow(this.xComp.magnatude,2) + pow(this.yComp.magnatude,2));
-		this.angle = arctan(this.yComp.magnatude / this.xComp.magnatude);
+		this.magnatude = sqrt(pow(this.xComp.getMagnatude(),2) + pow(this.yComp.getMagnatude(),2));
+		this.angle = arctan(this.yComp.getMagnatude() / this.xComp.getMagnatude());
 		console.log(this);
 		console.log("updated angle and magnatude");
 	},
@@ -57,8 +74,8 @@ Vector.prototype = {
 	//this method will set the vectors angle and magnatude based on components
 		this.xComp = new Vector(0,xComp);
 		this.yComp = new Vector(90,yComp);
-		this.magnatude = sqrt(pow(this.xComp.magnatude,2) + pow(this.yComp.magnatude,2));
-		this.angle = arctan(this.yComp.magnatude / this.xComp.magnatude);
+		this.magnatude = sqrt(pow(this.xComp.getMagnatude(),2) + pow(this.yComp.getMagnatude(),2));
+		this.angle = arctan(this.yComp.getMagnatude() / this.xComp.getMagnatude());
 		console.log(this);
 		console.log("angle and magnatude defined by components");
 	},
@@ -75,7 +92,7 @@ Vector.prototype = {
 
 	degrees:function(){
 	//this method returns the angle of the vector in degrees (it has been converted to radions for the computer)
-		return (this.angle * 180)/pi;
+		return (this.getAngle() * 180)/pi;
 	},
 
 	
@@ -83,18 +100,18 @@ Vector.prototype = {
 	//this method sets the vectors xComp and yComp elements to two new vectors
 	//the vectors have angles 0 and 90, and the correct magnatudes.
 		var reset = false;
-		if(this.x1 == null || this.y1 == null){
+		if(this.getX1() == null || this.getY1() == null){
 			this.setPos(0,0);
 			var reset = true;
 		}
-		this.xComp = new Vector(0,this.x2()-this.x1);
-		this.yComp = new Vector(90	,this.y2()-this.y1);
+		this.xComp = new Vector(0,this.x2()-this.getX1());
+		this.yComp = new Vector(90	,this.y2()-this.getY1());
 		if(reset == true){
 			this.x1 = null;
 			this.y1 = null;
 		}
-		console.log("xComp: " + this.xComp.magnatude);
-		console.log("yComp: " + this.yComp.magnatude);
+		console.log("xComp: " + this.xComp.getMagnatude());
+		console.log("yComp: " + this.yComp.getMagnatude());
 	},
 
 	add:function(other){
@@ -102,8 +119,8 @@ Vector.prototype = {
 	//It achieves this by adding the component vectors.
 		this.getComponentVectors();
 		other.getComponentVectors();
-		var newXComp = this.xComp.magnatude + other.xComp.magnatude;
-		var newYComp = this.yComp.magnatude + other.yComp.magnatude;
+		var newXComp = this.xComp.getMagnatude() + other.xComp.getMagnatude();
+		var newYComp = this.yComp.getMagnatude() + other.yComp.getMagnatude();
 
 		var addition = new Vector();
 		addition.defineByComponents(newXComp,newYComp);
@@ -114,8 +131,8 @@ Vector.prototype = {
 	//this method will create a copied vector of the "other," reverse it, then add the reveresed other with this.
 		this.getComponentVectors();
 		other.getComponentVectors();
-		var newXComp = this.xComp.magnatude - other.xComp.magnatude;
-		var newYComp = this.yComp.magnatude - other.yComp.magnatude;
+		var newXComp = this.xComp.getMagnatude() - other.xComp.getMagnatude();
+		var newYComp = this.yComp.getMagnatude() - other.yComp.getMagnatude();
 
 		var subtraction = new Vector();
 		subtraction.defineByComponents(newXComp,newYComp);
@@ -125,20 +142,20 @@ Vector.prototype = {
 	reverse:function(){
 	//this method will reverse the two points of the vector, then recalculate the angle and component vectors.
 		if(this.x1 != null || this.y1 != null){
-			var x1 = this.x1;
+			var x1 = this.getX1();
 			var x2 = this.x2();
-			var y1 = this.y1;
+			var y1 = this.getY1();
 			var y2 = this.y2();
 			this.x1 = x2;
 			this.y1 = y2;
 		}
 		
 		//keeping the angle less than 2pi
-		var newAngle = this.angle + toRad(180);
+		var newAngle = this.getAngle() + toRad(180);
 		if(newAngle < (2*pi))
 			this.angle = newAngle;
 		else {
-			newAngle = this.angle - toRad(180);
+			newAngle = this.getAngle() - toRad(180);
 			this.angle = newAngle;
 		}
 				
@@ -149,7 +166,7 @@ Vector.prototype = {
 	scale:function(factor){
 	//this method scales the magnatude of the vector by a scaling factor.
 	//it updates the component vectors
-		this.magnatude = this.magnatude * factor;
+		this.magnatude = this.getMagnatude() * factor;
 		this.getComponentVectors();
 		console.log(this);
 		console.log("scaled by " + factor);
@@ -157,6 +174,6 @@ Vector.prototype = {
 
 	duplicate: function(){
 	//this method returns a new vector with the same angle and magnatude.
-		return new Vector(this.degrees(),this.magnatude);
+		return new Vector(this.degrees(),this.getMagnatude());
 	}
 }
