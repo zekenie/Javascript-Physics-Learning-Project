@@ -13,7 +13,7 @@ var Vector = function(angle, magnatude, rad){
 		this.angle = angle;
 	if(magnatude)	
 		this.magnatude = magnatude;
-		
+
 	console.log(this);
 	console.log("new vector created.");
 }
@@ -54,6 +54,7 @@ Vector.prototype = {
 	},
 
 	defineByComponents:function(xComp,yComp){
+	//this method will set the vectors angle and magnatude based on components
 		this.xComp = new Vector(0,xComp);
 		this.yComp = new Vector(90,yComp);
 		this.magnatude = sqrt(pow(this.xComp.magnatude,2) + pow(this.yComp.magnatude,2));
