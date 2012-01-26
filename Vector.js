@@ -175,5 +175,15 @@ Vector.prototype = {
 	duplicate: function(){
 	//this method returns a new vector with the same angle and magnatude.
 		return new Vector(this.degrees(),this.getMagnatude());
+	},
+	draw:function(context){
+		//this method, when passed a canvas, will draw an arrow... the problem is, it'll be in px and will go the comp way...
+		var headlen = 10;   // length of head in pixels
+		var angle = this.getAngle();
+		context.moveTo(this.getX1(),this.getY1());
+		context.lineTo(this.x2(), this.y2());
+		context.lineTo(this.x2()-headlen*Math.cos(angle-Math.PI/6),this.y2()-headlen*Math.sin(angle-Math.PI/6));
+		context.moveTo(this.getX1(), this.getX2());
+		context.lineTo(THIS.X2()-headlen*Math.cos(angle+Math.PI/6),this.y2()-headlen*Math.sin(angle+Math.PI/6));
 	}
 }
