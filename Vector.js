@@ -176,14 +176,19 @@ Vector.prototype = {
 	//this method returns a new vector with the same angle and magnatude.
 		return new Vector(this.degrees(),this.getMagnatude());
 	},
-	draw:function(context){
+	draw:function(context,scale){
+		scale = scale * -1; //this is so the coordante system isn't upside down.
+		var x1 = this.getX1() * scale;
+		var x2 = this.x2() * scale;
+		var y1 = this.getY1() * scale;
+		var y2 = this.g2() * scale;
 		//this method, when passed a canvas, will draw an arrow... the problem is, it'll be in px and will go the comp way...
 		var headlen = 10;   // length of head in pixels
 		var angle = this.getAngle();
-		context.moveTo(this.getX1(),this.getY1());
-		context.lineTo(this.x2(), this.y2());
-		context.lineTo(this.x2()-headlen*Math.cos(angle-Math.PI/6),this.y2()-headlen*Math.sin(angle-Math.PI/6));
-		context.moveTo(this.getX1(), this.getX2());
-		context.lineTo(THIS.X2()-headlen*Math.cos(angle+Math.PI/6),this.y2()-headlen*Math.sin(angle+Math.PI/6));
+		context.moveTo(x1,y1);
+		context.lineTo(x2,y2);
+		context.lineTo(x2-headlen*Math.cos(angle-Math.PI/6),y2-headlen*Math.sin(angle-Math.PI/6));
+		context.moveTo(x1, y2);
+		context.lineTo(x2-headlen*Math.cos(angle+Math.PI/6),y2-headlen*Math.sin(angle+Math.PI/6));
 	}
 }
