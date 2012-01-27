@@ -47,14 +47,14 @@ Vector.prototype = {
 
 	x2:function(){
 		if(this.x1 != null)
-			return this.x1 + cos(this.angle) * this.magnatude;
+			return this.x1 + cos(this.getAngle()) * this.getMagnatude();
 		else 
 			return false;
 	},
 
 	y2:function(){
 		if(this.y1 != null)
-			return this.y1 + sin(this.angle) * this.magnatude;
+			return this.y1 + sin(this.getAngle()) * this.getMagnatude();
 		else
 			return false;
 	},
