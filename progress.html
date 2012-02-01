@@ -11,6 +11,8 @@
 			min-height: 600px;
 			padding-top: 4em;
 		}
+		blockquote:before         { content: "\275D"; }
+		blockquote:after          { content: "\275E"; }
 	</style>
 </head>
 <body id="bootstrap-js">
@@ -78,9 +80,28 @@
 						<tbody>
 							<tr>
 								<td><span class="label warning">UNANSWERED</span></td>
+								<td><date>01/25/12</date></td>
+								<td>Will there ever be a need to find an average magnatude or angle among a group of vectors? What about a standard deviation?</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td><span class="label success">ANSWERED</span></td>
 								<td><date>01/24/12</date></td>
 								<td><strong>3D Vectors?</strong> Do I need them? How are they even defined? You would need two angles and a magnatude, or two points in 3d space. I think we'll just forget about them for now, right?</td>
-								<td>&nbsp;</td>
+								<td>
+									<blockquote>It is easiest to think in terms of components rather than magnitude and direction, because then the generalization from 2D to 3D is trivial:  you just specify all 3 components instead of 2.  On the other hand, as I think you recognized, it's a bit tricky to specify a direction in 3-space -- it takes more than just a single angle!  But it can be done, indeed just along the lines of what you were thinking.  It just takes two angles.  You can picture it like this.  Picture a 3D coordinate system, with x, y, and z axis.  Now imagine some vector that is pointing in some random direction.  First, you can specify the angle that the vector makes with the z-axis.  If that's all you specified, the direction could be anything lying in a sort of "cone" around the z-axis.  Can you picture that?  So to resolve that ambiguity you just need to specify one more angle -- say, the angle that the vector makes in the x-y plane if you imagine looking down on it from "up high" along the z-axis.  This is hard to convey by email, so we can talk about it next time I see you if it's confusing.  Anyway, for your project, it might make sense to leave all of this aside and not worry about 3D vectors, at least not up front. </blockquote>
+									<p>Agreed. Leaving them aside. However, I have modified the code to allow a vector to be defined by angle and magnatude <em>or</em> by components. That should make 3D easier when we come to it. If I ever employ <a href="http://en.wikipedia.org/wiki/Cross_product" target="_blank">cross products</a>, of vectors I'll need 3D.</p>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="label success">ANSWERED</span></td>
+								<td><date>01/24/12</date></td>
+								<td>Vector multiplication? There's more to it than scaling, right?</td>
+								<td>
+									<blockquote>
+										This is somewhat tricky.  There's no single straightforward way of defining the multiplication of two vectors.  There are actually several different kinds of multiplication that work different ways and are useful for different things.  One is multiplying a vector by a scalar, which I think you understand.  It's discussed in Chapter 3 of the book.  But that doesn't really count as "vector multiplication" since it's not multiplying a vector by another vector.  But here are two kinds of full vector multiplication:  the "dot product" and the "cross product".  The former takes two vectors and combines them to give a scalar.  It comes up in physics with the concept of "work" which has to do with Energy. (Chapters 10-11.)  Then thre is something called the "cross product" which is a way of combining to vectors to give a new vector.  This comes up in physics with the concept of "torque" (Chapter 12).  Probably though, again, I'd recommend holding off on this stuff for a while, and getting simpler things (like vector addition and subtraction) straightened out first.
+									</blockquote>
+								</td>
 							</tr>
 							<tr>
 								<td><span class="label warning">UNANSWERED</span></td>
