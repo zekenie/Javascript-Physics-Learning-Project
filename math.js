@@ -34,3 +34,4 @@ function arcsech(x) {return arccosh(1/x)}
 function arccoth(x) {return arctanh(1/x)}
 
 function toRad(deg) {	return deg * Math.PI/180;	}
+function toDeg(r){return (r*180)/pi;}

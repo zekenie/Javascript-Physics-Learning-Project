@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
+	<link rel="stylesheet" href="css/ui-lightness/jquery.ui.all.css" type="text/css"/>
+	<style type="text/css">
+		canvas{
+			position: absolute;
+			top:0;
+			left:0;
+		}
+		.tooltip{padding-top: 1em;}
+			.modal{
+			width: 200px;
+		}
+	</style>
+	
+	<script src="Kinetic.js"></script>
+	<script src="math.js"></script>
+	<script src="VectorGroup.js"></script>
+	<script src="Vector.js"></script>
+	<script>
+
+	</script>
+</head>
+<body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container" >
+				<a class="brand" >Vector.js</a>
+				<div  style="float: right;">
+					<a class="btn" id="zoom-in"><i class="icon-zoom-in"></i></a>
+					<a class="btn" id="zoom-out"><i class="icon-zoom-out"></i></a>
+					<a class="btn" rel="tooltip" id="vectorGroupsBtn" title="Vector Groups..."><i class="icon-list-alt"></i></a>
+					<a class="btn" rel="tooltip" id="gridOptionsBtn" title="Grid Preferences"><i class="icon-th"></i></a>
+					<a class="btn" rel="tooltip" title="Add New Vector"><i class="icon-pencil"></i></a>
+
+					
+				
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal hide" id="grid-options">
+		<div class="modal-header"><a class="close closeModal" data-dismiss="modal">&times;</a><h3>Grid Options</h3></div>
+		<div class="modal-body"></div>
+	</div>
+
+	<div class="modal hide" id="vector-groups">
+		<div class="modal-header"><a class="close closeModal" data-dismiss="modal">&times;</a><h3>Vector Groups</h3></div>
+		<div class="modal-body"></div>
+	</div>
+
+	<div id="container">
+    </div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="js/jquery.ui.core.min.js"></script>
+	<script src="js/jquery.ui.widget.min.js"></script>
+	<script src="js/jquery.ui.mouse.min.js"></script>
+	<script src="js/jquery.ui.draggable.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+
+	<script>
+
+	$(".modal").draggable();
+
+	$(".closeModal").click(function(){
+		$(this).parents(".modal").toggle(250);
+	});
+
+	$("#gridOptionsBtn").click(function(){$("#grid-options").toggle(250);});
+	$("#vectorGroupsBtn").click(function(){$("#vector-groups").toggle(250);});
+
+	var width = $(document).width();
+	var height = $(document).height();
+	var scale = 20;
+	var relScale = 1;
+
+
+
+	$("[rel=tooltip]").tooltip({placement:'bottom'});
+	$("#zoom-in").click(function(){
+		relScale += 0.1;
+		stage.setScale(relScale);
+		stage.draw();
+		
+	});
+	$("#zoom-out").click(function(){
+		relScale -= 0.1;
+		stage.setScale(relScale);
+		stage.draw();
+	});
+	</script>
+	<script>
+		
+		var offset_x = width/2;
+		var offset_y = height/2;
+		var stage = new Kinetic.Stage("container", width, height);
+		var grid = new Kinetic.Layer();
+		var tooltipLayer = new Kinetic.Layer();
+		var vectorLayers = [];
+
+		var vectorGroups = [];
+
+		function initVectorGroups(){
+			for(var i = 0; i<vectorGroups.length; i++){
+				vectorLayers[i] = new Kinetic.Layer(vectorGroups[i].name);
+			}
+		}
+
+		function drawVectorGroups(){
+			for(var i = 0; i<vectorGroups.length; i++){
+				//clear vector layer
+				vectorLayers[i].clear();				
+				if(vectorGroups[i].visable == true){	//if the layer is visable, call its draw method
+					vectorGroups[i].draw(vectorLayers[i],scale,offset_x,offset_y);
+				}
+				stage.add(vectorLayers[i]);
+			}
+		}
+
+
+
+
+		var tooltip = new Kinetic.Shape(function(){
+			var context = this.getContext();
+			context.beginPath();
+			context.fillStyle = "black";
+			context.fillRect(5, 5, 200, 30);
+			context.font = "12pt Calibri";
+			context.fillStyle = "white";
+			context.textBaseline = "top";
+			context.fillText(this.text, 10, 10);
+		});
+
+		tooltip.text = "";
+
+		tooltip.hide();
+
+ 		tooltipLayer.add(tooltip);
+			
+		stage.add(tooltipLayer);
+
+
+
+	</script>
+	<script src="grid.js"></script>
+	<script>drawGrid();</script>
+
+	<script>
+
+		vectorGroups.push(new VectorGroup("myVectors"));
+		var a = new Vector(200,12);
+		a.setName("A");
+		a.setPos(0,0);
+		var b = new Vector(55,14);
+		b.setName("B");
+		b.setPos(a.x2(),a.y2());
+		var c = a.add(b);
+		c.setName("C");
+		c.setColor("#F60");
+		vectorGroups[0].addVector(a);
+		vectorGroups[0].addVector(b);
+		vectorGroups[0].addVector(c);
+		vectorGroups[0].showAllChildren();
+		vectorGroups[0].show();
+		initVectorGroups();
+		drawVectorGroups();
+	</script>
+
+</body>
+</html>

@@ -1,11 +1,84 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-	<!--<script src="sugar-1.2.min.js"></script>-->
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
+	<style type="text/css">
+		canvas{
+			position: absolute;
+			top:0;
+			left:0;
+		}
+	</style>
+	
+	<script src="Kinetic.js"></script>
 	<script src="math.js"></script>
 	<script src="Vector.js"></script>
+	<script>
+
+	</script>
 </head>
 <body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container" >
+				<a class="brand">Vector.js</a>
+				<div class="btn-group" style="float: right;">
+					<a class="btn "><i class="icon-pencil"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script>
+				//grid width and height
+		var bw = $(document).width();
+		var bh = $(document).height();
+		//size of canvas
+		var cw = bw + 1;
+		var ch = bh + 1;
+
+		
+
+
+		var canvas = $('<canvas/>').attr({id:'grid',width: cw, height: ch}).appendTo('body');
+
+		var context = canvas.get(0).getContext("2d");
+
+		function drawBoard(){
+		    for (var x = 0; x <= bw; x += 20) {
+		        context.moveTo(x, 0);
+		        context.lineTo(x, bh);
+		    }
+
+
+		    for (var x = 2; x <= bh; x += 20) {
+		        context.moveTo(0 ,x);
+		        context.lineTo(bw,x);
+		    }
+
+		    context.strokeStyle = "#ccc";
+		    context.stroke();
+		}
+
+		drawBoard();
+		var a = new Vector(190,10);
+		var b = new Vector(50,8);
+		var c = a.add(b);
+		var vectors = $("<canvas/>").attr({id:'vectors',width: cw, height: ch}).appendTo('body');
+
+		var vectors = vectors.get(0).getContext("2d");
+		a.setPos(30,-10);
+		b.setPos(0,0);
+		c.setPos(0,0);
+		vectors.beginPath();
+		var scale= 20;
+		a.draw(vectors,scale,cw/2,ch/2);
+		b.draw(vectors,scale,cw/2,ch/2);
+		c.draw(vectors,scale,cw/2,ch/2);
+		vectors.stroke();
+
+	</script>
 
 </body>
 </html>

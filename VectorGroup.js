@@ -1,11 +1,44 @@
 var VectorGroup = function(name){
 	this.name = name;
+	this.visable = false;
+	this.layer = null;
 	this.Vectors = [];
 }
 
 VectorGroup.prototype = {
 	addVector:function(vector){
 		this.Vectors.push(vector);
+		vector.vectorGroups.push(this);
+	},
+
+	draw:function(layer,scale,offset_x,offset_y){
+		this.layer = layer;
+		var context = layer.getContext();
+		for(var i=0;i<this.Vectors.length;i++){
+			if(this.Vectors[i].visable == true){
+				this.Vectors[i].draw(layer,scale,offset_x,offset_y);
+			}
+		}
+	},
+
+	show:function(){
+		this.visable = true;
+	},
+
+	showAllChildren:function(){
+		for(var i = 0; i<this.Vectors.length;i++){
+			this.Vectors[i].show();
+		}
+	},
+
+	hide:function(){
+		this.visable = false;
+	},
+
+	hideAllChildren:function(){
+		for(var i = 0; i<this.Vectors.length;i++){
+			this.Vectors[i].hide();
+		}
 	},
 	
 	sum:function(){
@@ -14,11 +47,13 @@ VectorGroup.prototype = {
 		var yComp=0;
 		for(var i=0;i<this.Vectors.length;i++){
 			var thisVector = this.Vectors[i];
-			thisVector.getComponentVectors();
-			xComp += thisVector.xComp.magnatude;
-			yComp += thisVector.yComp.magnatude;
+			thisVector.getComponents();
+			xComp += thisVector.xComp;
+			yComp += thisVector.yComp;
 		}
 		var newAngle = arctan(yComp/xComp);
+		if(xComp < 0 )
+			newAngle = toRad(newAngle + 180);
 		var newMagnatude = sqrt(pow(xComp,2)+pow(yComp,2));
 		return new Vector(newAngle,newMagnatude);
 	},		
